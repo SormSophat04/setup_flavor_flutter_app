@@ -1,0 +1,54 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:setup_flavor/modules/auth/controller/auth_controller.dart';
+import 'package:setup_flavor/routes/app_route.dart';
+import 'package:setup_flavor/widgets/custom_button.dart';
+import 'package:setup_flavor/widgets/custom_text_field.dart';
+
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<AuthController>(
+      init: Get.isRegistered<AuthController>()
+          ? Get.find<AuthController>()
+          : AuthController(),
+      autoRemove: false,
+      builder: (controller) => Scaffold(
+        body: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 46.0),
+                CustomTextField(
+                  hintText: 'Email',
+                  controller: controller.emailController,
+                ),
+                const SizedBox(height: 16.0),
+                CustomTextField(
+                  hintText: 'Password',
+                  controller: controller.passwordController,
+                ),
+                const SizedBox(height: 30.0),
+                CustomButton(
+                  label: 'Login',
+                  onTap: () => controller.login(),
+                  isloading: controller.loading.value,
+                ),
+                const SizedBox(height: 16.0),
+                TextButton(
+                  onPressed: () {
+                    Get.rootDelegate.toNamed(AppRoute.register);
+                  },
+                  child: const Text('Don\'t have an account? Sign Up'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

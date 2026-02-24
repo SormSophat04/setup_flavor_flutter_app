@@ -1,0 +1,11 @@
+<key>NSAppTransportSecurity</key>
+<dict>
+    <key>NSPinnedDomains</key>
+    <dict>
+        <key>api.bank.com</key>
+        <dict>
+            <key>NSIncludesSubdomains</key>
+            <true/>
+        </dict>
+    </dict>
+</dict>

@@ -1,0 +1,8 @@
+<network-security-config>
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">api.bank.com</domain>
+        <pin-set expiration="2029-01-01">
+            <pin digest="SHA-256">BASE64_CERT_HASH==</pin>
+        </pin-set>
+    </domain-config>
+</network-security-config>

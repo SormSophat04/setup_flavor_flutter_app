@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:setup_flavor/modules/main_layout/view/main_layout.dart';
+import 'package:setup_flavor/core/binding/main_binding.dart';
+import 'package:setup_flavor/routes/app_screen.dart';
 
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +13,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(home: MainLayout());
+    return GetMaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      getPages: AppScreen.routes,
+      initialBinding: MainBinding(),
+    );
   }
 }
