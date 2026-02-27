@@ -45,7 +45,7 @@ class SignUpView extends StatelessWidget {
                     onTap: () => controller.signUp(),
                     isloading: controller.loading.value,
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 16),
                   TextButton(
                     onPressed: () {
                       Get.rootDelegate.toNamed(AppRoute.login);

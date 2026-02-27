@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -23,7 +24,7 @@ class CustomTextField extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.grey[200],
         border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(8.0),
+        borderRadius: BorderRadius.circular(8.r),
       ),
       child: TextFormField(
         controller: controller,
