@@ -15,17 +15,24 @@ class AuthController extends GetxController {
 
   final loading = false.obs;
 
+  final loginFormKey = GlobalKey<FormState>();
+  final signUpFormKey = GlobalKey<FormState>();
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   Future<void> login() async {
+    if (!_validateForm(loginFormKey)) {
+      return;
+    }
+
     var isSuccess = false;
     try {
       loading.value = true;
       update();
       await _authRepository.login(
         AuthModel(
-          email: emailController.text,
+          email: emailController.text.trim(),
           password: passwordController.text,
         ),
       );
@@ -44,12 +51,16 @@ class AuthController extends GetxController {
   }
 
   Future<void> signUp() async {
+    if (!_validateForm(signUpFormKey)) {
+      return;
+    }
+
     var isSuccess = false;
     try {
       loading.value = true;
       update();
       final authModel = AuthModel(
-        email: emailController.text,
+        email: emailController.text.trim(),
         password: passwordController.text,
       );
 
@@ -91,5 +102,13 @@ class AuthController extends GetxController {
       return;
     }
     await Get.rootDelegate.offNamed(routeName);
+  }
+
+  bool _validateForm(GlobalKey<FormState> formKey) {
+    final state = formKey.currentState;
+    if (state == null) {
+      return true;
+    }
+    return state.validate();
   }
 }

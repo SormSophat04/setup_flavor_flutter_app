@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:setup_flavor/core/utils/validator.dart';
 import 'package:setup_flavor/modules/auth/controller/auth_controller.dart';
 import 'package:setup_flavor/routes/app_route.dart';
 import 'package:setup_flavor/widgets/custom_button.dart';
@@ -19,32 +20,40 @@ class SignUpView extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                const SizedBox(height: 46.0),
-                CustomTextField(
-                  hintText: 'Email',
-                  controller: controller.emailController,
-                ),
-                const SizedBox(height: 16.0),
-                CustomTextField(
-                  hintText: 'Password',
-                  controller: controller.passwordController,
-                ),
-                const SizedBox(height: 30.0),
-                CustomButton(
-                  label: 'Sign Up',
-                  onTap: () => controller.signUp(),
-                  isloading: controller.loading.value,
-                ),
-                const SizedBox(height: 16.0),
-                TextButton(
-                  onPressed: () {
-                    Get.rootDelegate.toNamed(AppRoute.login);
-                  },
-                  child: const Text('Already have an account? Login'),
-                ),
-              ],
+            child: Form(
+              key: controller.signUpFormKey,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              child: Column(
+                children: [
+                  const SizedBox(height: 46.0),
+                  CustomTextField(
+                    hintText: 'Email',
+                    controller: controller.emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: Validator.validateEmail,
+                  ),
+                  const SizedBox(height: 16.0),
+                  CustomTextField(
+                    hintText: 'Password',
+                    controller: controller.passwordController,
+                    obscureText: true,
+                    validator: Validator.validatePassword,
+                  ),
+                  const SizedBox(height: 30.0),
+                  CustomButton(
+                    label: 'Sign Up',
+                    onTap: () => controller.signUp(),
+                    isloading: controller.loading.value,
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextButton(
+                    onPressed: () {
+                      Get.rootDelegate.toNamed(AppRoute.login);
+                    },
+                    child: const Text('Already have an account? Login'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
