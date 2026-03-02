@@ -1,0 +1,1 @@
+class SecurityException implements Exception {}

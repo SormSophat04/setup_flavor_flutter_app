@@ -3,6 +3,6 @@ import 'package:setup_flavor/core/config/flavor.dart';
 import 'package:setup_flavor/main_common.dart';
 
 void main() {
-  AppConfig.init(Flavor.prod);
+  AppConfig.init(AppEnv.flavor = Flavor.prod);
   bootstrap();
 }
